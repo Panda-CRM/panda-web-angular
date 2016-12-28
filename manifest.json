@@ -1,0 +1,33 @@
+{
+  "manifest_version": 2,
+  "version": "1",
+  "name": "Panda Web",
+  "short_name": "O melhor sistema de gestão para o seu negócio, alcance resultados!",
+  "description": "O melhor sistema de gestão para o seu negócio, alcance resultados!",
+ 
+  "icons": {
+    "16": "img/favicon-monde.png",
+    "48": "img/favicon-monde.png",
+    "128": "img/favicon-monde.png"
+  },
+
+  "permissions": [
+    "tabs",
+    "http://localhost:8080/*"
+  ],
+
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+
+  "browser_action": {
+    "default_title": "Panda Web",
+    "default_icon": {
+      "16": "img/favicon-monde.png",
+      "24": "img/favicon-monde.png",
+      "32": "img/favicon-monde.png"
+    }
+  }
+}

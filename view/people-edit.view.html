@@ -1,0 +1,406 @@
+<section class="content-header">
+  <h1>
+    <i class="fa fa-user" /> Pessoa
+    <small>{{routerAction}}</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#/" class="menu_action"><i class="fa fa-dashboard"></i> Inicio</a></li>
+    <li><a href="#/people" class="menu_action"><i class="fa fa-group"></i> Pessoas</a></li>
+    <li class="active">{{routerAction}} </li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+  <!-- Box para Erros -->
+  <div ng-show="error != null" class="callout callout-danger">
+    <h4><i class="icon fa fa-warning" /> Erro</h4>
+
+    <p ng-repeat="err in error">{{err}}</p>
+  </div>
+
+
+  <form name="peopleForm">
+  <div class="row">
+
+    <!-- Profile Image -->
+    <div class="col-md-3">
+      <div class="box box-primary">
+        <div class="box-body box-profile">
+          <img class="profile-user-img img-responsive img-circle" src="/img/monde-128x128.png" alt="User profile picture">
+
+          <h3 class="profile-username text-center">{{person.name}}</h3>
+          <br>
+          <ul class="list-group list-group-unbordered">
+            <li class="list-group-item" ng-show="person.registered_at">
+              <strong><i class="fa fa-calendar margin-r-5"></i> Cadastrado</strong>
+
+              <p class="text-muted">{{person.registered_at | date:"dd/MM/yyyy"}} por {{person.registered_name}}</p>
+            </li>
+
+            <li class="list-group-item" ng-show="(person.type | uppercase) == 'F'">
+              <strong><i class="fa fa-user margin-r-5"></i> Tipo</strong>
+
+              <p class="text-muted">Pessoa Fisica</p>
+            </li>
+
+            <li class="list-group-item" ng-show="person.city_name">
+              <strong><i class="fa fa-map-marker margin-r-5"></i> Cidade</strong>
+
+              <p class="text-muted">{{person.city_name}}</p>
+            </li>
+
+            <li class="list-group-item" ng-show="(person.type | uppercase) == 'J'">
+              <strong><i class="fa fa fa-building-o margin-r-5"></i> Tipo</strong>
+
+              <p class="text-muted">Pessoa Juridica</p>
+            </li>
+
+            <li class="list-group-item" ng-show="person.email">
+              <strong><i class="fa fa-at margin-r-5"></i> E-mail</strong>
+
+              <p class="text-muted">{{person.email}}</p>
+            </li>
+          </ul>
+
+          <a ng-if="person.email" ng-href="mailto:{{person.email}}" target="_blank" class="btn btn-primary btn-block">Enviar E-mail</a>
+        </div>
+        <!-- /.box-body -->
+      </div>
+    </div>
+
+
+    <!-- Profile Info -->
+    <div class="col-md-9">
+
+        <uib-tabset active="activeJustified" justified="true">
+          <uib-tab index="0" heading="Dados Pessoais">
+
+
+            <div class="box box-solid" ng-if="(person.type | uppercase) == 'F'">
+              <div class="box-body">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>Nome</label>
+                      <input type="text" class="form-control input-sm" ng-model="person.name" name="name" ng-required="true" ng-minlength="2" />
+                      <div ng-messages="peopleForm.name.$error" class="help-block text-red">
+                          <div ng-message="required">Por favor, preencha o nome!</div>
+                          <div ng-message="minlength">O nome deve ter no mínimo 2 caracteres.</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>CPF</label>
+                      <input type="text" class="form-control input-sm" ng-model="person.cpf" />
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>RG</label>
+                      <input type="text" class="form-control input-sm" ng-model="person.rg" />
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Sexo</label>
+                      <select class="form-control input-sm" ng-model="person.gender">
+                        <option value="F">Femenino</option>
+                        <option value="M">Masculino</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Data Nascimento</label>
+                      <div class="input-group date calendar-birth-date">
+                        <input type="text" class="form-control" data-format="MM/dd/yyyy" />
+                        <span class="input-group-addon">
+                          <span class="fa fa-calendar"></span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>Observações</label>
+                      <textarea ng-model="person.observations" class="form-control" rows="5"></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="box box-solid" ng-if="(person.type | uppercase) == 'J'">
+              <div class="box-body">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Nome</label>
+                      <input type="text" class="form-control input-sm" ng-model="person.name" name="name" ng-required="true" />
+                      <div ng-messages="peopleForm.name.$error" class="help-block text-red">
+                          <div ng-message="required">Por favor, preencha o nome!</div>
+                          <div ng-message="minlength">O nome deve ter no mínimo 2 caracteres.</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Razão Social</label>
+                      <input type="text" class="form-control input-sm" ng-model="person.company_name" />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>CNPJ</label>
+                      <input type="text" class="form-control input-sm" ng-model="person.cnpj" />
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Inscrição Estadual</label>
+                      <input type="text" class="form-control input-sm" ng-model="person.state_inscription" />
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Data Nascimento</label>
+                      <div class="input-group date calendar-birth-date">
+                        <input type="text" class="form-control" data-format="MM/dd/yyyy" />
+                        <span class="input-group-addon">
+                          <span class="fa fa-calendar"></span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>Observações</label>
+                      <textarea ng-model="person.observations" class="form-control" rows="5"></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          </uib-tab>
+          <uib-tab index="1" heading="Contato">
+
+
+            <div class="box box-solid">
+              <div class="box-body">
+                <div class="row" ng-if="(person.type | uppercase) == 'F'">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Fone Residencial</label>
+                      <div class="input-group">
+                        <input type="text" class="form-control input-sm" ng-model="person.home_phone">
+                        <div class="input-group-addon">
+                          <i class="fa fa-phone"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Fone Comercial</label>
+                      <div class="input-group">
+                        <input type="text" class="form-control input-sm" ng-model="person.business_phone" />
+                        <div class="input-group-addon">
+                          <i class="fa fa-phone"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Fone Celular</label>
+                      <div class="input-group">
+                        <input type="text" class="form-control input-sm" ng-model="person.mobile_phone" />
+                        <div class="input-group-addon">
+                          <i class="fa fa-phone"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row" ng-if="(person.type | uppercase) == 'J'">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Telefone</label>
+                      <div class="input-group">
+                        <input type="text" class="form-control input-sm" ng-model="person.phone" />
+                        <div class="input-group-addon">
+                          <i class="fa fa-phone"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Fax</label>
+                      <div class="input-group">
+                        <input type="text" class="form-control input-sm" ng-model="person.fax" />
+                        <div class="input-group-addon">
+                          <i class="fa fa-phone"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-8">
+                    <div class="form-group">
+                      <label>E-mail</label>
+                      <div class="input-group">
+                        <input type="text" class="form-control input-sm" ng-model="person.email" />
+                        <div class="input-group-addon">
+                          <i class="fa fa-at"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row" ng-if="(person.type | uppercase) == 'J'">
+                  <div class="col-md-8">
+                    <div class="form-group">
+                      <label>Website</label>
+                      <div class="input-group">
+                        <input type="text" class="form-control input-sm" ng-model="person.website" />
+                        <div class="input-group-addon">
+                          <i class="fa fa-desktop"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          </uib-tab>
+          <uib-tab index="2" heading="Endereço">
+
+
+            <div class="box box-solid">
+              <div class="box-body">
+                <div class="row">
+                  <div class="col-md-9">
+                    <div class="form-group">
+                      <label>Rua</label>
+                      <input type="text" class="form-control input-sm" ng-model="person.address" />
+                    </div>
+                  </div>
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Número</label>
+                      <input type="text" class="form-control input-sm" ng-model="person.number" />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-9">
+                    <div class="form-group">
+                      <label>Complemento</label>
+                      <input type="text" class="form-control input-sm" ng-model="person.complement" />
+                    </div>
+                  </div>
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>CEP</label>
+                      <div class="input-group">
+                        <input type="text" class="form-control input-sm" ng-model="person.zip" />
+                        <div class="input-group-addon">
+                          <i class="glyphicon glyphicon-map-marker"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Bairro</label>
+                      <input type="text" class="form-control input-sm" ng-model="person.district" name="district" ng-maxlength="30" />
+                      <div ng-show="peopleForm.district.$invalid" class="help-block text-red">
+                        Bairro só pode ter 30 caracteres!
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Cidade</label>
+                      <input type="text" class="form-control input-sm" ng-model="person.city_name" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          </uib-tab>
+        </uib-tabset>
+
+
+        <div class="box box-footer">
+          <button ng-show="person.id" type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-people-delete"><i class="fa fa-trash-o"></i> Excluir</button>
+          <div class="pull-right">
+            <a href="#/people" class="btn btn-default"><i class="fa fa-fw fa-reply"></i> Cancelar</a>
+            <button ng-click="savePerson(person)" ng-disabled="peopleForm.$invalid" class="btn btn-success"><i class="fa fa-fw fa-save"></i> Salvar</button>
+          </div>
+        </div>
+    </div>
+  </div>
+  </form>
+</section>
+
+<div id="modal-people-delete" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title text-red"><i class="icon fa fa-warning" /> Exclusão</h4>
+      </div>
+      <div class="modal-body">
+        <p>Deseja realmente excluir o(s) registro(s)?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button ng-click="deletePerson(person)" type="button" class="btn btn-danger" data-dismiss="modal">Excluir</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

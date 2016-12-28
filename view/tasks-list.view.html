@@ -1,0 +1,191 @@
+<section class="content-header">
+  <h1>
+    <i class="fa fa-calendar" /> Tarefas
+    <small nf-show="newTasksCount > 0">{{newTasksCount}} novas tarefas</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href=""><i class="fa fa-dashboard"></i> Inicio</a></li>
+    <li class="active">Tarefas</li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+  <div class="row">
+    <div class="col-md-3">
+      <a href="#/tasks/new" class="btn btn-success btn-block margin-bottom">Novo</a>
+
+      <div class="box box-solid">
+        <div class="box-header with-border">
+          <h3 class="box-title">Filtros</h3>
+
+          <div class="box-tools">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+          </div>
+        </div>
+        <div class="box-body no-padding">
+          <ul class="nav nav-pills nav-stacked">
+            <li>
+              <a href="">
+                
+                <label>Pesquisa</label>
+                <div class="has-feedback">
+                  <input ng-model="txtSearch" type="text" class="form-control input-sm" placeholder="Título">
+                  <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                </div>
+
+              </a>
+            </li>
+            <li>
+              <a href="">
+
+                <label>Situação</label>
+                <select ng-model="filters.situation" class="form-control input-sm">
+                  <option value="">Todas</option>
+                  <option value="open">Não concluída</option>
+                  <option value="done">Concluida</option>
+                </select>
+
+              </a>
+            </li>
+            <li>
+              <a href="">
+
+                <label>Tarefas</label>
+                <select ng-model="filters.assigned" class="form-control input-sm">
+                  <option value="">Todas</option>
+                  <option value="user_tasks">Minhas Tarefas</option>
+                  <option value="author">Delegadas</option>
+                </select>
+
+              </a>
+            </li>
+          </ul>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer with-border"></div>
+      </div>
+      <!-- /. box -->
+      <button ng-click="loadTasks(filters)" class="btn btn-primary btn-block margin-bottom">Pesquisar</button>
+    </div>
+    <!-- /.col -->
+    
+    <div class="col-md-9">
+      <div class="box box-primary">
+        <div class="box-header with-border">
+          <h3 class="box-title">Resultados</h3>
+
+          <div class="box-tools pull-right">
+            <div class="has-feedback">
+              <input ng-model="txtSearch" type="text" class="form-control input-sm" placeholder="Título">
+              <span class="glyphicon glyphicon-search form-control-feedback"></span>
+            </div>
+          </div>
+          <!-- /.box-tools -->
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body no-padding">
+          <div class="mailbox-controls">
+            <!-- Check all button -->
+            <button type="button" class="btn btn-default btn-sm checkbox-toggle" ng-click="toggleAllCheckBox()">
+              <i ng-class="isAllSelected ? 'fa fa-check-square-o' : 'fa fa-square-o'"></i>
+            </button>
+            <div class="btn-group">
+              <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modal-task-delete"><i class="fa fa-trash-o" /></button>
+            </div>
+            <!-- /.btn-group -->
+            <div class="pull-right">
+              {{currentPage}} / {{lastPage}}
+              <div class="btn-group">
+                <button ng-click="makePagination(-1)" type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
+                <button ng-click="makePagination(+1)" type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
+              </div>
+              <!-- /.btn-group -->
+            </div>
+            <!-- /.pull-right -->
+          </div>
+          <div class="table-responsive mailbox-messages">
+            <table class="table table-hover table-striped" style="font-size: 14;">
+              <thead>
+                <th><i class="fa fa-star text-yellow"></i></th>
+                <th>N°</th>
+                <th>Categoria</th>
+                <th>Título</th>
+                <th>Pessoa</th>
+                <th>Responsável</th>
+                <th>Vencimento</th>
+                <th></th>
+              </thead>
+              <tbody>
+              <tr ng-repeat="task in tasks | filter:{title: txtSearch} | orderBy:'due'">
+                <td style="text-align: center;">
+                  <input type="checkbox" ng-model="task.selected">
+                </td>
+                <td class="mailbox-star">{{::task.number}}</td>
+                <td>{{::task.category}}</td>
+                <td class="mailbox-subject"><a href="#/tasks/{{::task.id}}/edit"><b><i ng-show="{{!task.visualized}}" class="fa fa-eye-slash" /> {{::task.title}}</b></a></td>
+                <td><a href="#/people/{{::task.person.id}}/edit">{{::task.person.name}}</a></td>
+                <td class="mailbox-name">{{::task.assignee.name}}</td>
+                <td class="mailbox-date">{{::task.due | date:"dd/MM/yyyy"}}</td>
+                <td>
+                  <small ng-if="task.situationTag == 'green'" class="label label-success"><i class="fa fa-clock-o"></i> Concluída</small>
+                  <small ng-if="task.situationTag == 'yellow'" class="label label-warning"><i class="fa fa-clock-o"></i> Vencendo hoje</small>
+                  <small ng-if="task.situationTag == 'red'" class="label label-danger"><i class="fa fa-clock-o"></i> Vencido</small>
+                  <small ng-if="task.situationTag == 'blue'" class="label label-primary"><i class="fa fa-clock-o"></i> Irá vencer</small>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+            <!-- /.table -->
+          </div>
+          <!-- /.mail-box-messages -->
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer no-padding">
+          <div class="mailbox-controls">
+            <!-- Check all button -->
+            <button type="button" class="btn btn-default btn-sm checkbox-toggle" ng-click="toggleAllCheckBox()">
+              <i ng-class="isAllSelected ? 'fa fa-check-square-o' : 'fa fa-square-o'"></i>
+            </button>
+            <div class="btn-group">
+              <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modal-task-delete"><i class="fa fa-trash-o"></i></button>
+            </div>
+            <!-- /.btn-group -->
+            <div class="pull-right">
+              {{currentPage}} / {{lastPage}}
+              <div class="btn-group">
+                <button ng-click="makePagination(-1)" type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
+                <button ng-click="makePagination(+1)" type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
+              </div>
+              <!-- /.btn-group -->
+            </div>
+            <!-- /.pull-right -->
+          </div>
+        </div>
+      </div>
+      <!-- /. box -->
+    </div>
+    <!-- /.col -->
+  </div>
+  <!-- /.row -->
+</section>
+
+<div id="modal-task-delete" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title text-red"><i class="icon fa fa-warning" /> Exclusão</h4>
+      </div>
+      <div class="modal-body">
+        <p>Deseja realmente excluir o(s) registro(s)?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button ng-click="deleteTasks(tasks)" type="button" class="btn btn-danger" data-dismiss="modal">Excluir</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

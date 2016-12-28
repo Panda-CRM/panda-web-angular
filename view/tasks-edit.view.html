@@ -1,0 +1,193 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	<h1>
+		<i class="fa fa-calendar" /> Tarefa
+		<small>{{routerAction}}</small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#/"><i class="fa fa-dashboard" /> Inicio</a></li>
+		<li><a href="#/tasks" class="menu_action"><i class="fa fa-calendar"></i> Tarefas</a></li>
+		<li class="active">{{routerAction}}</li>
+	</ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+	<!-- Box para Erros -->
+	<div ng-show="error != null" class="callout callout-danger">
+		<h4><i class="icon fa fa-warning" /> Erro</h4>
+
+		<p>{{error}}</p>
+	</div>
+
+	<div class="row">
+		<!-- Task -->
+		<div class="col-md-6">
+			<div class="box box-primary">
+				<div class="box-header with-border">
+					<h3 class="box-title"><i class="icon fa fa-star" /> Número: {{task.number}}</h3>
+				</div>
+				<div class="box-body">
+				<form name="taskForm">
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="form-group">
+								<label>Titulo</label>
+								<input ng-model="task.title" type="text" name="title" class="form-control" ng-required="true" ng-minlength="3">
+								<div ng-messages="taskForm.title.$error" class="help-block text-red">
+								    <div ng-message="required">Por favor, preencha o campo título!</div>
+								    <div ng-message="minlength">O campo titulo deve ter no mínimo 3 caracteres.</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label>Categoria</label>
+								<select ng-model="task.category" name="category" class="form-control" ng-required="true">
+									<option ng-repeat="category in taskCategories">{{category.description}}</option>
+								</select>
+								<div ng-show="taskForm.category.$invalid" class="help-block text-red">
+									Por favor, selecione uma categoria!
+								</div>
+							</div>
+						</div>
+
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label>Responsável</label>
+								<select ng-model="task.assignee.id" name="assignee" class="form-control" ng-required="true">
+									<option ng-repeat="assignee in taskAssignees" value="{{assignee.id}}">{{assignee.name}}</option>
+								</select>
+								<div ng-show="taskForm.assignee.$invalid" class="help-block text-red">
+									Por favor, selecione um responsável!
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label>Data Vencimento</label>
+								<div class="input-group date" id="calendar-date-due">
+				                  	<input type="text" class="form-control" data-format="MM/dd/yyyy HH:mm:" />
+				                  	<span class="input-group-addon">
+				                     	<span class="fa fa-calendar"></span>
+				                  	</span>
+				                </div>
+							</div>
+						</div>
+
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label>Data Conclusão</label>
+								<div class="input-group">
+									<input class="form-control" placeholder="MM/DD/YYYY" type="text" disabled ng-model="task.completed_at" />
+									<div class="input-group-addon">
+										<label>Concluída &nbsp&nbsp<input type="checkbox" ng-model="completed"></label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="form-group">
+								<label>Pessoa</label>
+								<!-- <input type="text" class="form-control" ng-model="task.person.name"> -->
+								<angucomplete-alt id="members"
+					              placeholder="Buscar pessoa"
+					              text-no-results="Pessoa não encontrada"
+					              pause="400"
+					              minlength="3"
+					              remote-url="https://web.monde.com.br/api/v1/people?filter="
+					              remote-url-data-field="people"
+					              title-field="name"
+					              description-field="code"
+					              selected-object="selectedPerson"
+					              initial-value="task.person.name"
+					              match-class="highlight"
+					              input-class="form-control form-control-small">
+					              </angucomplete-alt>
+							</div>
+						</div>
+					</div>
+				</form>
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="form-group">
+								<label>Comentário</label>
+								<form name="commentForm">
+									<textarea ng-model="comment" name="comment" class="form-control" rows="5" ng-required="true" style="resize: vertical;"></textarea>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="box-footer">
+					<button ng-click="saveComment(comment)" class="btn btn-primary" ng-disabled="commentForm.comment.$invalid"><i class="fa fa-fw fa-comment" /> Adicionar Comentário</button>
+					<button ng-show="task.id" type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-task-delete"><i class="fa fa-trash-o"></i> Excluir</button>
+					<div class="pull-right">
+						<a href="#/tasks" class="btn btn-default"><i class="fa fa-fw fa-reply" /> Cancelar</a>
+						<button ng-click="saveTask(task)" class="btn btn-success" ng-disabled="taskForm.$invalid"><i class="fa fa-fw fa-save" /> Salvar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Timeline -->
+		<div class="col-md-6">
+			<div class="box box-primary">
+				<div class="box-header with-border">
+					<h3 class="box-title"><i class="fa fa-fw fa-comments" /> Histórico de Comentários</h3>
+				</div>
+				<div class="box-body">
+					<div ng-show="!task.task_historics">
+						<h4>Nenhum comentário para mostrar!</h4>
+					</div>
+					<ul ng-show="task.task_historics" class="timeline timeline-inverse">
+						<li class="time-label" ng-repeat-start="historic in task.task_historics">
+							<span ng-if="historic.showDate == true" class="bg-green">{{historic.date_time | date:"dd MMM yyyy"}}</span>
+						</li>
+
+						<li ng-repeat-end>
+							<i class="fa fa-comments bg-yellow" />
+							<div class="timeline-item">
+								<span class="time"><i class="fa fa-clock-o" /> {{historic.date_time | date:"hh:mm"}}</span>
+								<h3 class="timeline-header">
+									<a href="#/people/{{historic.person.id}}/edit">{{historic.person.name}}</a><small ng-show="historic.commentTemp"> Comentário não salvo ainda</small>
+								</h3>
+								<div class="timeline-body">{{historic.text ? historic.text : historic.historic}}</div>
+							</div>
+						</li>
+
+						<li><i class="fa fa-clock-o bg-gray" /></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- /.content -->
+
+<div id="modal-task-delete" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title text-red"><i class="icon fa fa-warning" /> Exclusão</h4>
+      </div>
+      <div class="modal-body">
+        <p>Deseja realmente excluir o(s) registro(s)?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button ng-click="deleteTask(task)" type="button" class="btn btn-danger" data-dismiss="modal">Excluir</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

@@ -1,0 +1,45 @@
+{
+  "name": "angular-monde-web",
+  "version": "1.0.0",
+  "description": "Monde Web",
+  "main": "background.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://wilsontamarozzi@bitbucket.org/wilsontamarozzi/angular-monde-web.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/wilsontamarozzi/angular-monde-web#readme",
+  "devDependencies": {
+    "event-stream": "^3.3.4",
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-clean-css": "^2.0.13",
+    "gulp-concat": "^2.6.0",
+    "gulp-htmlmin": "^3.0.0",
+    "gulp-jshint": "^2.0.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^2.0.0",
+    "jshint": "^2.9.3",
+    "run-sequence": "^1.2.2"
+  },
+  "dependencies": {
+    "angucomplete-alt": "^2.5.0",
+    "angular": "^1.5.8",
+    "angular-google-analytics": "^1.1.7",
+    "angular-messages": "^1.5.8",
+    "angular-route": "^1.5.8",
+    "angular-ui-bootstrap": "^2.2.0",
+    "angular-ui-notification": "^0.2.0",
+    "bootstrap": "^3.3.7",
+    "eonasdan-bootstrap-datetimepicker": "^4.17.43",
+    "gulp-replace-async": "0.0.1",
+    "jquery": "^3.1.1",
+    "ngstorage": "^0.3.11",
+    "require-dir": "^0.3.1",
+    "superagent": "^2.3.0"
+  }
+}

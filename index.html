@@ -1,0 +1,133 @@
+<html ng-app="mondeWeb">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Panda Web</title>
+  <link rel="shortcut icon" href="img/favicon-monde.png">
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.6 -->
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="css/AdminLTE.min.css">
+  <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
+        page. However, you can choose any other skin. Make sure you
+        apply the skin class to the body tag so the changes take effect.
+      -->
+      <link rel="stylesheet" href="css/skins/skin-blue.min.css">
+      <link rel="stylesheet" href="node_modules/angucomplete-alt/angucomplete-alt.css">
+      <link rel="stylesheet" href="node_modules/angular-ui-notification/dist/angular-ui-notification.min.css">
+      <link rel="stylesheet" href="node_modules/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css">
+      <link rel="stylesheet" href="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-csp.css">
+
+      <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+      <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<!--
+BODY TAG OPTIONS:
+=================
+Apply one or more of the following classes to get the
+desired effect
+|---------------------------------------------------------|
+| SKINS         | skin-blue                               |
+|               | skin-black                              |
+|               | skin-purple                             |
+|               | skin-yellow                             |
+|               | skin-red                                |
+|               | skin-green                              |
+|---------------------------------------------------------|
+|LAYOUT OPTIONS | fixed                                   |
+|               | layout-boxed                            |
+|               | layout-top-nav                          |
+|               | sidebar-collapse                        |
+|               | sidebar-mini                            |
+|---------------------------------------------------------|
+-->
+<body>
+  <div ng-if="currentUser" class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+
+      <!-- Main Header -->
+      <div ng-include="'view/header.html'"></div>
+      <!-- Left side column. contains the logo and sidebar -->
+      <div ng-include="'view/sidebar.html'"></div>
+
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+        <div ng-view></div>
+      </div>
+
+      <!-- Main Footer -->
+      <div ng-include="'view/footer.html'"></div>
+      <!-- Add the sidebar's background. This div must be placed
+      immediately after the control sidebar -->
+      <div class="control-sidebar-bg"></div>
+    </div>
+  </div>
+  <div ng-if="!currentUser">
+    <div ng-view></div>
+  </div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED JS SCRIPTS -->
+<!-- jQuery 2.2.3 -->
+<script src="node_modules/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- Moment 2.15.2 -->
+<script src="node_modules/moment/min/moment.min.js"></script>
+<!-- Momento Locale 2.15.2 -->
+<script src="node_modules/moment/locale/pt-br.js"></script>
+<!-- Bootstrap DatePicker 3 -->
+<script src="node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+<!-- AdminLTE App -->
+<script src="js/ui/app.js"></script>
+
+<!-- Angular scripts -->
+<script src="node_modules/angular/angular.js"></script>
+<script src="node_modules/angular-messages/angular-messages.min.js"></script>
+<script src="node_modules/angular-route/angular-route.min.js"></script>
+<script src="node_modules/ngstorage/ngstorage.min.js"></script>
+<script src="node_modules/angucomplete-alt/dist/angucomplete-alt.min.js"></script>
+<script src="node_modules/angular-ui-notification/dist/angular-ui-notification.min.js"></script>
+<script src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
+<script src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+<script src="node_modules/angular-google-analytics/dist/angular-google-analytics.min.js"></script>
+
+<!-- Aplicação & Configs scripts -->
+<script src="js/app.js"></script>
+<script src="js/config/route.config.js"></script>
+<script src="js/config/value.config.js"></script>
+<script src="js/config/compile-provider.config.js"></script>
+<script src="js/config/interceptor.config.js"></script>
+<script src="js/config/analytics-provider.config.js"></script>
+<!-- Controllers -->
+<script src="js/controllers/index.controller.js"></script>
+<script src="js/controllers/task-list.controller.js"></script>
+<script src="js/controllers/task-edit.controller.js"></script>
+<script src="js/controllers/task-new.controller.js"></script>
+<script src="js/controllers/task-categorie.controller.js"></script>
+<script src="js/controllers/people-list.controller.js"></script>
+<script src="js/controllers/people-edit.controller.js"></script>
+<script src="js/controllers/people-new.controller.js"></script>
+<!-- Services -->
+<script src="js/services/authentication.service.js"></script>
+<script src="js/services/task.service.js"></script>
+<script src="js/services/task-categorie.service.js"></script>
+<script src="js/services/people.service.js"></script>
+<!-- Helpers -->
+<script src="js/helpers/task.helper.js"></script>
+<script src="js/helpers/notification.helper.js"></script>
+<!-- Interceptors -->
+<script src="js/interceptors/http-request.interceptor.js"></script>
+<script src="js/interceptors/loading.interceptor.js"></script>
+</body>
+</html>
