@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular
-		.module('mondeWeb')
+		.module('appWeb')
 		.factory('PeopleService', Service);
 
 	function Service($http, ConfigApp) {

@@ -6,9 +6,9 @@
   "description": "O melhor sistema de gestão para o seu negócio, alcance resultados!",
  
   "icons": {
-    "16": "img/favicon-monde.png",
-    "48": "img/favicon-monde.png",
-    "128": "img/favicon-monde.png"
+    "16": "img/favicon-app.png",
+    "48": "img/favicon-app.png",
+    "128": "img/favicon-app.png"
   },
 
   "permissions": [
@@ -25,9 +25,9 @@
   "browser_action": {
     "default_title": "Panda Web",
     "default_icon": {
-      "16": "img/favicon-monde.png",
-      "24": "img/favicon-monde.png",
-      "32": "img/favicon-monde.png"
+      "16": "img/favicon-app.png",
+      "24": "img/favicon-app.png",
+      "32": "img/favicon-app.png"
     }
   }
 }

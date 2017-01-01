@@ -1,7 +1,7 @@
 ( function() {
 
 	angular
-		.module('mondeWeb')
+		.module('appWeb')
 		.value('ConfigApp', {
 			baseUrl: 'http://localhost:8080/'
 		});

@@ -2,7 +2,7 @@
 	'use strict';
 	
 	angular
-		.module('mondeWeb')
+		.module('appWeb')
 		.config(Config);
 
 	function Config($httpProvider) {

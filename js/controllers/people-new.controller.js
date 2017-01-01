@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular
-		.module('mondeWeb')
+		.module('appWeb')
 		.controller('PeopleNewCtrl', Controller);
 
 	function Controller($scope, $routeParams, $location, Notification, PeopleService) {
@@ -25,7 +25,7 @@
 				$location.path('/people');
 			}).error(function (data) {
 				/* Exibe o erro para o usuário */
-				$scope.error = data.status == 403 ? 'Você não tem permissão para executar essa ação.' : data.error;
+				$scope.error = data.status == 403 ? 'Você não tem permissão para executar essa ação.' : data.errors;
 			});
 		};
 		

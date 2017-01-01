@@ -1,18 +1,18 @@
 {
-  "name": "angular-monde-web",
+  "name": "panda-web",
   "version": "1.0.0",
-  "description": "Monde Web",
+  "description": "Panda Web",
   "main": "background.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://wilsontamarozzi@bitbucket.org/wilsontamarozzi/angular-monde-web.git"
+    "url": "git+https://github.com/wilsontamarozzi/panda-api.git"
   },
   "author": "",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/wilsontamarozzi/angular-monde-web#readme",
+  "homepage": "https://github.com/wilsontamarozzi/panda-api#readme",
   "devDependencies": {
     "event-stream": "^3.3.4",
     "gulp": "^3.9.1",

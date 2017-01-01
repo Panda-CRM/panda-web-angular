@@ -2,7 +2,7 @@
 	'use strict';
 
 	var app = angular
-		.module('mondeWeb', ['ngRoute', 'ngMessages', 'ngStorage', 'angucomplete-alt', 'ui-notification', 'ui.bootstrap', 'angular-google-analytics'])
+		.module('appWeb', ['ngRoute', 'ngMessages', 'ngStorage', 'angucomplete-alt', 'ui-notification', 'ui.bootstrap', 'angular-google-analytics'])
 		.run(run);
 
 	function run($rootScope, $http, $location, $localStorage, NotificationHelper) {

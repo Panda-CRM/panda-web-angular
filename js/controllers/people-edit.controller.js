@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular
-		.module('mondeWeb')
+		.module('appWeb')
 		.controller('PeopleEditCtrl', Controller);
 
 	function Controller($scope, $location, $routeParams, Notification, PeopleService, NotificationHelper) {
@@ -24,7 +24,7 @@
 			});			
 		}).error(function (data) {
 			$scope.error = 'Não foi possível carregar os dados!';
-			NotificationHelper.addPeopleGet(data.error);
+			NotificationHelper.addPeopleGet(data.errors);
 		});
 
 		$scope.savePerson = function(person) {
@@ -38,8 +38,8 @@
 				$location.path('/people');
 			}).error(function (data) {
 				/* Exibe o erro para o usuário */
-				$scope.error = data.status == 403 ? 'Você não tem permissão para executar essa ação.' : data.error;
-				NotificationHelper.addPeopleEdit(person.name, data.error);
+				$scope.error = data.status == 403 ? 'Você não tem permissão para executar essa ação.' : data.errors;
+				NotificationHelper.addPeopleEdit(person.name, data.errors);
 			});
 		};
 
@@ -55,7 +55,7 @@
 			}).error(function (data) {
 				/* Notifica usuário do problema */
 				Notification.error({message: '<i class="icon fa fa-warning" /> Houve um erro ao excluir o registro', delay: 2000});
-				NotificationHelper.addPeopleDelete(person.name, data.error);
+				NotificationHelper.addPeopleDelete(person.name, data.errors);
 			});
 		};
 

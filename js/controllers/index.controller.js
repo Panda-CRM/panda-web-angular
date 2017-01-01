@@ -2,7 +2,7 @@
     'use strict';
  
     angular
-        .module('mondeWeb')
+        .module('appWeb')
         .controller('IndexCtrl', Controller);
  
     function Controller($rootScope, $localStorage, $scope, $location, AuthenticationService) {

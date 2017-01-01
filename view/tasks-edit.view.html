@@ -47,8 +47,8 @@
 						<div class="col-sm-6">
 							<div class="form-group">
 								<label>Categoria</label>
-								<select ng-model="task.category" name="category" class="form-control" ng-required="true">
-									<option ng-repeat="category in taskCategories">{{category.description}}</option>
+								<select ng-model="task.category.id" name="category" class="form-control" ng-required="true">
+									<option ng-repeat="category in taskCategories" value="{{category.id}}">{{category.description}}</option>
 								</select>
 								<div ng-show="taskForm.category.$invalid" class="help-block text-red">
 									Por favor, selecione uma categoria!
@@ -104,7 +104,7 @@
 					              text-no-results="Pessoa não encontrada"
 					              pause="400"
 					              minlength="3"
-					              remote-url="https://web.monde.com.br/api/v1/people?filter="
+					              remote-url="https://localhost:8080/api/v1/people?filter="
 					              remote-url-data-field="people"
 					              title-field="name"
 					              description-field="code"
@@ -151,17 +151,17 @@
 					</div>
 					<ul ng-show="task.task_historics" class="timeline timeline-inverse">
 						<li class="time-label" ng-repeat-start="historic in task.task_historics">
-							<span ng-if="historic.showDate == true" class="bg-green">{{historic.date_time | date:"dd MMM yyyy"}}</span>
+							<span ng-if="historic.showDate == true" class="bg-green">{{historic.registered_at | date:"dd MMM yyyy"}}</span>
 						</li>
 
 						<li ng-repeat-end>
 							<i class="fa fa-comments bg-yellow" />
 							<div class="timeline-item">
-								<span class="time"><i class="fa fa-clock-o" /> {{historic.date_time | date:"hh:mm"}}</span>
+								<span class="time"><i class="fa fa-clock-o" /> {{historic.registered_at | date:"hh:mm"}}</span>
 								<h3 class="timeline-header">
-									<a href="#/people/{{historic.person.id}}/edit">{{historic.person.name}}</a><small ng-show="historic.commentTemp"> Comentário não salvo ainda</small>
+									<a href="#/people/{{historic.registered_by.id}}/edit">{{historic.registered_by.name}}</a><small ng-show="historic.commentTemp"> Comentário não salvo ainda</small>
 								</h3>
-								<div class="timeline-body">{{historic.text ? historic.text : historic.historic}}</div>
+								<div class="timeline-body">{{historic.comment ? historic.comment : historic.historic}}</div>
 							</div>
 						</li>
 

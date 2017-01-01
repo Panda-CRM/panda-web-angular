@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular
-		.module('mondeWeb')
+		.module('appWeb')
 		.controller('TaskEditCtrl', Controller);
 
 	function Controller($scope, $location, $localStorage, $routeParams, $filter, TaskService, taskCategories, taskAssignees, Notification, TaskHelper) {
@@ -24,7 +24,7 @@
 			$scope.completed = $scope.task.completed_at ? true : false;
 		}).error(function (data) {
 			$scope.error = 'Não foi possível carregar os dados!';
-			NotificationHelper.addTasksGet(data.error);
+			NotificationHelper.addTasksGet(data.errors);
 		});
 
 		/* Salva o comentário na timeline */
@@ -57,7 +57,16 @@
 			/* Salva apenas os novos comentário para não duplicar no post */
 			task.task_historics = commentsTemp;
 			/* Verifica se a tarefa foi concluída para setar uma data de conclusão */
-			task.completed_at = $scope.completed ? (task.completed_at ? task.completed_at : new Date()) : '';
+			//task.completed_at = $scope.completed ? (task.completed_at ? task.completed_at : new Date()) : delete task.completed_at;
+			
+			if ($scope.completed) {
+				if (!task.completed_at) {
+					task.completed_at = new Date();
+				}
+			} else {
+				delete task.completed_at;
+			}
+
 			/* Posta os dados no server */
 			TaskService.putTask(task).success(function (data) {
 				/* Notifica usuário os dados foi alterado */
@@ -66,8 +75,8 @@
 				$location.path('/tasks');
 			}).error(function (data) {
 				/* Exibe o erro para o usuário */
-				$scope.error = data.status == 403 ? 'Você não tem permissão para executar essa ação.' : data.error;
-				NotificationHelper.addTasksEdit(task.title, data.error);
+				$scope.error = data.status == 403 ? 'Você não tem permissão para executar essa ação.' : data.errors;
+				NotificationHelper.addTasksEdit(task.title, data.errors);
 			});
 		};
 
@@ -83,7 +92,7 @@
 			}).error(function (data) {
 				/* Notifica usuário do problema */
 				Notification.error({message: '<i class="icon fa fa-warning" /> Houve um erro ao excluir os registros', delay: 2000});
-				NotificationHelper.addTasksDelete(task.title, data.error);
+				NotificationHelper.addTasksDelete(task.title, data.errors);
 			});
 		};
 

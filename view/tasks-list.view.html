@@ -123,8 +123,8 @@
                 <td style="text-align: center;">
                   <input type="checkbox" ng-model="task.selected">
                 </td>
-                <td class="mailbox-star">{{::task.number}}</td>
-                <td>{{::task.category}}</td>
+                <td class="mailbox-star">{{::task.code}}</td>
+                <td>{{::task.category.description}}</td>
                 <td class="mailbox-subject"><a href="#/tasks/{{::task.id}}/edit"><b><i ng-show="{{!task.visualized}}" class="fa fa-eye-slash" /> {{::task.title}}</b></a></td>
                 <td><a href="#/people/{{::task.person.id}}/edit">{{::task.person.name}}</a></td>
                 <td class="mailbox-name">{{::task.assignee.name}}</td>

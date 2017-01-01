@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular
-		.module('mondeWeb')
+		.module('appWeb')
 		.controller('PeopleListCtrl', Controller);
 
 	function Controller($rootScope, $scope, Notification, PeopleService, NotificationHelper) {
@@ -31,7 +31,7 @@
 						people.splice(people.indexOf(item), 1);
 					}).error(function (data) {
 						/* Notifica usuário do problema */
-						NotificationHelper.addPeopleDelete(item.name, data.error);
+						NotificationHelper.addPeopleDelete(item.name, data.errors);
 					});
 				}
 			});

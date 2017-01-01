@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular
-		.module('mondeWeb')
+		.module('appWeb')
 		.controller('TaskNewCtrl', Controller);
 
 	function Controller($scope, $location, $localStorage, TaskService, taskCategories, taskAssignees, Notification, TaskHelper) {
@@ -45,7 +45,7 @@
 			/* Salva apenas os novos comentário para não duplicar no post */
 			task.task_historics = commentsTemp;
 			/* Verifica se a tarefa foi concluída para setar uma data de conclusão */
-			task.completed_at = $scope.completed ? (task.completed_at ? task.completed_at : new Date()) : '';
+			//task.completed_at = $scope.completed ? (task.completed_at ? task.completed_at : new Date()) : delete task.completed_at;
 			/* Posta os dados no server */
 			TaskService.postTask(task).success(function (data) {
 				/* Notifica usuário os dados foi alterado */
@@ -54,7 +54,7 @@
 				$location.path('/tasks');
 			}).error(function (data) {
 				/* Exibe o erro para o usuário */
-				$scope.error = data.status == 403 ? 'Você não tem permissão para executar essa ação.' : data.error;
+				$scope.error = data.status == 403 ? 'Você não tem permissão para executar essa ação.' : data.errors;
 			});
 		};
 

@@ -2,34 +2,38 @@
 	'use strict';
 
 	angular
-		.module('mondeWeb')
+		.module('appWeb')
 		.factory('TaskHelper', Service);
 
 	function Service($filter) {
 
 		/* Agrupa os historicos por data para montar a timeline na view */
-		function _buildTimelineComments(comments) {
-			var currentDate;
+		function _buildTimelineComments(comments) {			
 
-			/* Ordena os comentário do mais recente para o mais antigo */
-			comments.sort(function (a, b) {
-				return new Date(b.date_time) - new Date(a.date_time);
-			});
+			if(typeof comments !== 'undefined' && comments != null) {
 
-			/* Seta quais data serão nós para exibir as datas */
-			angular.forEach(comments, function (comment) {
-				/* Convert a data String em data removendo horario */
-				var _date = $filter('date')(new Date(comment.date_time), 'dd/MM/yyyy');
+				var currentDate;
 
-				/* Compara se a data atual é diferente da ultima data */
-				if(currentDate !== _date) {
-					currentDate = _date;
-					comment.showDate = true;
-				} else {
-					comment.showDate = false;	
-				}
-			});
+				/* Ordena os comentário do mais recente para o mais antigo */
+				comments.sort(function (a, b) {
+					return new Date(b.registered_at) - new Date(a.registered_at);
+				});
 
+				/* Seta quais data serão nós para exibir as datas */
+				angular.forEach(comments, function (comment) {
+					/* Convert a data String em data removendo horario */
+					var _date = $filter('date')(new Date(comment.registered_at), 'dd/MM/yyyy');
+
+					/* Compara se a data atual é diferente da ultima data */
+					if(currentDate !== _date) {
+						currentDate = _date;
+						comment.showDate = true;
+					} else {
+						comment.showDate = false;	
+					}
+				});
+			}
+			
 			return comments;
 		}
 
@@ -40,8 +44,8 @@
 			if(text && personName) {
 				comment = {
 					commentTemp : true,
-					text : text,
-					date_time : new Date(),
+					comment : text,
+					registered_at : new Date(),
 					person : {
 						name : personName
 					}

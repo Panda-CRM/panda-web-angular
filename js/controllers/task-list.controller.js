@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular
-		.module('mondeWeb')
+		.module('appWeb')
 		.controller('TaskListCtrl', Controller);
 
 	function Controller($scope, TaskService, TaskHelper, Notification, NotificationHelper) {
@@ -39,7 +39,7 @@
 						$scope.newTasksCount = TaskHelper.tasksNotVisualizedCount(tasks);
 					}).error(function (data) {
 						/* Notifica usuário do problema */
-						NotificationHelper.addTasksDelete(item.title, data.error);
+						NotificationHelper.addTasksDelete(item.title, data.errors);
 					});
 				}
 			});

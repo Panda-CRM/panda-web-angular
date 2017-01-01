@@ -1,7 +1,7 @@
 ( function() {
 
 	angular
-		.module('mondeWeb')
+		.module('appWeb')
 		.config(Config);
 
 	function Config($routeProvider) {

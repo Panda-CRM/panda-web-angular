@@ -2,10 +2,10 @@
 	'use strict';
 
 	angular
-		.module('mondeWeb')
+		.module('appWeb')
 		.factory('AuthenticationService', Service);
 
-	function Service($rootScope, $http, $localStorage, $location, PeopleService, NotificationHelper) {
+	function Service($rootScope, $http, $localStorage, $location, PeopleService, NotificationHelper, ConfigApp) {
 
 		function _Login(username, password, callback) {
 
@@ -14,7 +14,7 @@
 				'password' : password
 			}
 
-			return $http.post('http://localhost:8080/api/v1/auth/auth_token', auth).success( function(response) {
+			return $http.post(ConfigApp.baseUrl + 'api/v1/auth/auth_token', auth).success( function(response) {
 				if(response.token) {
 					$localStorage.token = response.token;
 

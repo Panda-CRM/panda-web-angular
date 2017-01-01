@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular
-		.module('mondeWeb')
+		.module('appWeb')
 		.factory('NotificationHelper', Service);
 
 	function Service($rootScope) {

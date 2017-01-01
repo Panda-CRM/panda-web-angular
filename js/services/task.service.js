@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular
-		.module('mondeWeb')
+		.module('appWeb')
 		.factory('TaskService', Service);
 
 	function Service($http, ConfigApp) {

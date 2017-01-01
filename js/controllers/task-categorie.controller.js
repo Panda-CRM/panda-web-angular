@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular
-		.module('mondeWeb')
+		.module('appWeb')
 		.controller('TaskCategorieCtrl', Controller);
 
 	function Controller($scope, TaskCategorieService) {

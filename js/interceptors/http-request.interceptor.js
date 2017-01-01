@@ -2,7 +2,7 @@
 	'use strict';
 	
 	angular
-		.module('mondeWeb')
+		.module('appWeb')
 		.factory('httpRequestInterceptor', interceptors);
 
 	function interceptors($rootScope, $location, $q, $localStorage) {
