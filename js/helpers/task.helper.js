@@ -10,7 +10,7 @@
 		/* Agrupa os historicos por data para montar a timeline na view */
 		function _buildTimelineComments(comments) {			
 
-			if(typeof comments !== 'undefined' && comments != null) {
+			if(typeof comments !== 'undefined' && comments !== null) {
 
 				var currentDate;
 

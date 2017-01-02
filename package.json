@@ -4,16 +4,15 @@
   "description": "Panda Web",
   "main": "background.js",
   "scripts": {
-    "postinstall": "npm install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wilsontamarozzi/panda-api.git"
+    "url": "git+https://github.com/wilsontamarozzi/panda-web-angular.git"
   },
   "author": "",
   "license": "ISC",
-  "homepage": "https://github.com/wilsontamarozzi/panda-api#readme",
+  "homepage": "https://github.com/wilsontamarozzi/panda-web-angular#readme",
   "devDependencies": {
     "event-stream": "^3.3.4",
     "gulp": "^3.9.1",

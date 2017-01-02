@@ -11,8 +11,8 @@
 
 			var auth = {
 				'username' : username,
-				'password' : password
-			}
+				'password' : password,
+			};
 
 			return $http.post(ConfigApp.baseUrl + 'api/v1/auth/auth_token', auth).success( function(response) {
 				if(response.token) {
