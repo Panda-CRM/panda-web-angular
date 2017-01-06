@@ -55,8 +55,8 @@
 			templateUrl: 'view/tasks-edit.view.html',
             controller: 'TaskNewCtrl',
 			resolve: {
-				taskCategories: function(TaskCategorieService) {
-					return TaskCategorieService.getTaskCategories();
+				taskCategories: function(TaskCategoriesService) {
+					return TaskCategoriesService.getTaskCategories();
 				},
 				taskAssignees : function(PeopleService) {
 					return PeopleService.getPeople({'only_users' : 'true'});
@@ -68,13 +68,23 @@
 			templateUrl: 'view/tasks-edit.view.html',
             controller: 'TaskEditCtrl',
 			resolve: {
-				taskCategories: function(TaskCategorieService) {
-					return TaskCategorieService.getTaskCategories();
+				taskCategories: function(TaskCategoriesService) {
+					return TaskCategoriesService.getTaskCategories();
 				},
 				taskAssignees : function(PeopleService) {
 					return PeopleService.getPeople({'only_users' : 'true'});
 				}
 			}
+		});
+
+		$routeProvider.when('/task-categories', {
+			templateUrl: 'view/task-categories-list.view.html',
+            controller: 'TaskCategoriesListCtrl'
+		});
+
+		$routeProvider.when('/task-categories/new', {
+			templateUrl: 'view/task-categories-edit.view.html',
+            controller: 'TaskCategoriesNewCtrl'
 		});
 	}
 })();

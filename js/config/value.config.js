@@ -3,6 +3,6 @@
 	angular
 		.module('appWeb')
 		.value('ConfigApp', {
-			baseUrl: 'https://panda-api.herokuapp.com/'
+			baseUrl: 'http://localhost:8080/'
 		});
 })();

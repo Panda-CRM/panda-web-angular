@@ -1,0 +1,151 @@
+<section class="content-header">
+  <h1>
+    <i class="fa fa-group" /> Categorias de Tarefa
+    <small>Lista de categorias</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#" class="menu_action" id="dashboard"><i class="fa fa-dashboard"></i> Inicio</a></li>
+    <li class="active">Categorias de Tarefa</li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="row">
+    <div class="col-md-3">
+
+      <a href="#/task-categories/new" class="btn btn-success btn-block margin-bottom">Novo</a>
+
+      <div class="box box-solid">
+        <div class="box-header with-border">
+          <h3 class="box-title">Filtros</h3>
+
+          <div class="box-tools">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"/></button>
+          </div>
+        </div>
+        <div class="box-body no-padding">
+          <ul class="nav nav-pills nav-stacked">
+            <li>
+              <a href="">
+
+                <label>Pesquisa</label>
+                <div class="box-tools">
+                  <div class="has-feedback">
+                    <input type="text" class="form-control input-sm" ng-model="filters.filter" placeholder="Descrição ...">
+                    <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                  </div>
+                </div>
+
+              </a>
+            </li>
+          </ul>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer with-border"></div>
+      </div>
+      <!-- /. box -->
+      <button ng-click="loadTaskCategories(filters)" class="btn btn-primary btn-block margin-bottom">Pesquisar</button>
+    </div>
+    
+    <div class="col-md-9">
+      <div class="box box-primary">
+        <div class="box-header with-border">
+          <h3 class="box-title">Resultados</h3>
+
+          <div class="box-tools pull-right">
+            <div class="has-feedback">
+              <input ng-model="filters.filter" type="text" class="form-control input-sm" placeholder="Nome">
+              <span class="glyphicon glyphicon-search form-control-feedback"></span>
+            </div>
+          </div>
+          <!-- /.box-tools -->
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body no-padding">
+          <div class="mailbox-controls">
+            <!-- Check all button -->
+            <button type="button" class="btn btn-default btn-sm checkbox-toggle" ng-click="toggleAllCheckBox()">
+              <i ng-class="isAllSelected ? 'fa fa-check-square-o' : 'fa fa-square-o'"></i>
+            </button>
+            <div class="btn-group">
+              <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modal-people-delete"><i class="fa fa-trash-o" /></button>
+            </div>
+            <!-- /.btn-group -->
+            <div class="pull-right">
+              {{currentPage}} / {{lastPage}}
+              <div class="btn-group">
+                <button ng-click="makePagination(-1)" type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
+                <button ng-click="makePagination(+1)" type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
+              </div>
+              <!-- /.btn-group -->
+            </div>
+            <!-- /.pull-right -->
+          </div>
+          <div class="table-responsive mailbox-messages">
+            <table class="table table-hover table-striped" style="font-size: 14;">
+              <thead>
+                <th style="width:60px;"><i class="fa fa-star text-yellow"></i></th>
+                <th>Descrição</th>
+              </thead>
+              <tbody>
+                <tr ng-repeat="taskCategory in taskCategories | filter:{description: filters.filter} | orderBy:'-description'">
+                  <td style="text-align: center;">
+                    <input type="checkbox" ng-model="taskCategory.selected">
+                  </td>
+                  <td><a href="#/task-categories/{{taskCategory.id}}/edit"><b>{{::taskCategory.description}}</b></a></td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- /.table -->
+          </div>
+          <!-- /.mail-box-messages -->
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer no-padding">
+          <div class="mailbox-controls">
+            <!-- Check all button -->
+            <button type="button" class="btn btn-default btn-sm checkbox-toggle" ng-click="toggleAllCheckBox()">
+              <i ng-class="isAllSelected ? 'fa fa-check-square-o' : 'fa fa-square-o'"></i>
+            </button>
+            <div class="btn-group">
+              <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modal-people-delete"><i class="fa fa-trash-o" /></button>
+            </div>
+            <!-- /.btn-group -->
+            <div class="pull-right">
+              {{currentPage}} / {{lastPage}}
+              <div class="btn-group">
+                <button ng-click="makePagination(-1)" type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
+                <button ng-click="makePagination(+1)" type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
+              </div>
+              <!-- /.btn-group -->
+            </div>
+            <!-- /.pull-right -->
+          </div>
+        </div>
+      </div>
+      <!-- /. box -->
+    </div>
+    <!-- /.col -->
+  </div>
+  <!-- /.row -->
+</section>
+<!-- /.content -->
+
+<div id="modal-people-delete" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title text-red"><i class="icon fa fa-warning" /> Exclusão</h4>
+      </div>
+      <div class="modal-body">
+        <p>Deseja realmente excluir o(s) registro(s)?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button ng-click="deleteTaskCategories(taskCategories)" type="button" class="btn btn-danger" data-dismiss="modal">Excluir</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

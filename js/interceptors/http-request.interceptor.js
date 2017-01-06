@@ -20,6 +20,8 @@
 	            	config.headers['Content-Type'] = 'application/json; charset=utf-8';
 	            }
 
+	            config.headers['Access-Control-Allow-Origin'] = '*';
+
 	            return config;
 	        },
 

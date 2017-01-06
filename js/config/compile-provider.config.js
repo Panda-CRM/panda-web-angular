@@ -4,7 +4,7 @@
 	angular
 		.module('appWeb')
 		.config(['$compileProvider', function($compileProvider) {   
-		        $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|chrome-extension):/);
+		        $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|file|mailto|chrome-extension):/);
 		    }
 		]);
 })();

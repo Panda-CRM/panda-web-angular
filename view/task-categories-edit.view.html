@@ -1,0 +1,54 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	<h1>
+		<i class="fa fa-calendar" /> Categoria de Tarefa
+		<small>{{routerAction}}</small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#/"><i class="fa fa-dashboard" /> Inicio</a></li>
+		<li><a href="#/categorys" class="menu_action"><i class="fa fa-calendar"></i> Categoria de Tarefa</a></li>
+		<li class="active">{{routerAction}}</li>
+	</ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+	<!-- Box para Erros -->
+	<div ng-show="error != null" class="callout callout-danger">
+		<h4><i class="icon fa fa-warning" /> Erro</h4>
+
+	    <p ng-repeat="err in error">{{err}}</p>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6">
+			<div class="box box-primary">
+				<div class="box-header with-border"></div>
+				<div class="box-body">
+				<form name="categoryForm">
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="form-group">
+								<label>Decrição</label>
+								<input ng-model="category.description" type="text" name="title" class="form-control" ng-required="true" ng-minlength="2">
+								<div ng-messages="categoryForm.title.$error" class="help-block text-red">
+								    <div ng-message="required">Por favor, preencha o campo descrição!</div>
+								    <div ng-message="minlength">O campo descrição deve ter no mínimo 2 caracteres.</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+				<div class="box-footer">
+					<button ng-show="category.id" type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-category-delete"><i class="fa fa-trash-o"></i> Excluir</button>
+					<div class="pull-right">
+						<a href="#/categorys" class="btn btn-default"><i class="fa fa-fw fa-reply" /> Cancelar</a>
+						<button ng-click="saveTaskCategory(category)" class="btn btn-success" ng-disabled="categoryForm.$invalid"><i class="fa fa-fw fa-save" /> Salvar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- /.content -->
