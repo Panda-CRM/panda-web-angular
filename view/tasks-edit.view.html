@@ -18,7 +18,7 @@
 	<div ng-show="error != null" class="callout callout-danger">
 		<h4><i class="icon fa fa-warning" /> Erro</h4>
 
-		<p>{{error}}</p>
+	    <p ng-repeat="err in error">{{err}}</p>
 	</div>
 
 	<div class="row">
