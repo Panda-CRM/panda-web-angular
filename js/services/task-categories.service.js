@@ -16,11 +16,11 @@
 		}
 
 		function _postTaskCategory(category) {
-			return $http.post(ConfigApp.baseUrl + 'api/v1/task_categories', {task_categories: category});	
+			return $http.post(ConfigApp.baseUrl + 'api/v1/task_categories', {task_category: category});	
 		}
 
 		function _putTaskCategory(category) {
-			return $http.put(ConfigApp.baseUrl + 'api/v1/task_categories/' + category.id, {task_categories : category});
+			return $http.put(ConfigApp.baseUrl + 'api/v1/task_categories/' + category.id, {task_category : category});
 		}
 
 		function _deleteTaskCategory(id) {

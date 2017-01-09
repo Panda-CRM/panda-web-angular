@@ -7,8 +7,8 @@
 
 	function Controller($scope, $routeParams, $location, Notification, TaskCategoriesService) {
 
-		$scope.saveTaskCategory = function(category) {
-			TaskCategoriesService.postTaskCategory(category).success(function (data) {
+		$scope.saveTaskCategory = function(taskCategory) {
+			TaskCategoriesService.postTaskCategory(taskCategory).success(function (data) {
 				Notification.success({message: '<i class="icon fa fa-check" /> Registro alterado com sucesso!', delay: 2000});
 				$location.path('/task-categories');
 			}).error(function (data) {
@@ -18,6 +18,6 @@
 		};
 		
 		$scope.routerAction = 'Cadastrar';
-		$scope.category = {};
+		$scope.taskCategory = {};
 	}
 })();

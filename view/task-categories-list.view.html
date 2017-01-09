@@ -1,6 +1,6 @@
 <section class="content-header">
   <h1>
-    <i class="fa fa-group" /> Categorias de Tarefa
+    <i class="fa  fa-tags" /> Categorias de Tarefa
     <small>Lista de categorias</small>
   </h1>
   <ol class="breadcrumb">
@@ -89,7 +89,7 @@
                 <th>Descrição</th>
               </thead>
               <tbody>
-                <tr ng-repeat="taskCategory in taskCategories | filter:{description: filters.filter} | orderBy:'-description'">
+                <tr ng-repeat="taskCategory in taskCategories | filter:{description: filters.filter} | orderBy:'description'">
                   <td style="text-align: center;">
                     <input type="checkbox" ng-model="taskCategory.selected">
                   </td>

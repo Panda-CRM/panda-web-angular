@@ -7,11 +7,34 @@
 
 	function Controller($scope, TaskService, TaskHelper, Notification, NotificationHelper) {
 
+		$('#calendar-start-date').datetimepicker({
+            locale: 'pt-br',
+            format: 'DD/MM/YYYY'
+        });
+
+        $('#calendar-end-date').datetimepicker({
+            locale: 'pt-br',
+            format: 'DD/MM/YYYY'
+        });
+
 		/* Carrega as tarefas na view */
 		$scope.loadTasks = function() {
 			$scope.filters.page = $scope.currentPage;
 			$scope.filters.per_page = itemPerPage;
 			$scope.isAllSelected = false;
+
+			$scope.filters.start_date = $('#calendar-start-date').datetimepicker('date');
+			$scope.filters.end_date = $('#calendar-end-date').datetimepicker('date');
+
+			if ($scope.filters.start_date != null) {
+				var d = new Date($scope.filters.start_date);
+				$scope.filters.start_date = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate();
+			}
+
+			if ($scope.filters.end_date != null) {
+				var d = new Date($scope.filters.end_date);
+				$scope.filters.end_date = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate();
+			}
 
 			TaskService.getTasks($scope.filters).success(function (data) {
 				/* Seta qual a ultima pagina que contem dados */

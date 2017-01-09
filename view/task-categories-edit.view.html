@@ -1,12 +1,12 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
 	<h1>
-		<i class="fa fa-calendar" /> Categoria de Tarefa
+		<i class="fa fa-tag" /> Categoria de Tarefa
 		<small>{{routerAction}}</small>
 	</h1>
 	<ol class="breadcrumb">
 		<li><a href="#/"><i class="fa fa-dashboard" /> Inicio</a></li>
-		<li><a href="#/categorys" class="menu_action"><i class="fa fa-calendar"></i> Categoria de Tarefa</a></li>
+		<li><a href="#/task-categories" class="menu_action"><i class="fa fa-calendar"></i> Categoria de Tarefa</a></li>
 		<li class="active">{{routerAction}}</li>
 	</ol>
 </section>
@@ -31,7 +31,7 @@
 						<div class="col-sm-12">
 							<div class="form-group">
 								<label>Decrição</label>
-								<input ng-model="category.description" type="text" name="title" class="form-control" ng-required="true" ng-minlength="2">
+								<input ng-model="taskCategory.description" type="text" name="title" class="form-control" ng-required="true" ng-minlength="2">
 								<div ng-messages="categoryForm.title.$error" class="help-block text-red">
 								    <div ng-message="required">Por favor, preencha o campo descrição!</div>
 								    <div ng-message="minlength">O campo descrição deve ter no mínimo 2 caracteres.</div>
@@ -41,10 +41,10 @@
 					</div>
 				</form>
 				<div class="box-footer">
-					<button ng-show="category.id" type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-category-delete"><i class="fa fa-trash-o"></i> Excluir</button>
+					<button ng-show="taskCategory.id" type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-item-delete"><i class="fa fa-trash-o"></i> Excluir</button>
 					<div class="pull-right">
 						<a href="#/categorys" class="btn btn-default"><i class="fa fa-fw fa-reply" /> Cancelar</a>
-						<button ng-click="saveTaskCategory(category)" class="btn btn-success" ng-disabled="categoryForm.$invalid"><i class="fa fa-fw fa-save" /> Salvar</button>
+						<button ng-click="saveTaskCategory(taskCategory)" class="btn btn-success" ng-disabled="categoryForm.$invalid"><i class="fa fa-fw fa-save" /> Salvar</button>
 					</div>
 				</div>
 			</div>
@@ -52,3 +52,21 @@
 	</div>
 </section>
 <!-- /.content -->
+
+<div id="modal-item-delete" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title text-red"><i class="icon fa fa-warning" /> Exclusão</h4>
+      </div>
+      <div class="modal-body">
+        <p>Deseja realmente excluir o(s) registro(s)?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button ng-click="deleteTaskCategory(taskCategory)" type="button" class="btn btn-danger" data-dismiss="modal">Excluir</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

@@ -86,5 +86,10 @@
 			templateUrl: 'view/task-categories-edit.view.html',
             controller: 'TaskCategoriesNewCtrl'
 		});
+
+		$routeProvider.when('/task-categories/:id/edit', {
+			templateUrl: 'view/task-categories-edit.view.html',
+            controller: 'TaskCategoriesEditCtrl'
+		});
 	}
 })();
