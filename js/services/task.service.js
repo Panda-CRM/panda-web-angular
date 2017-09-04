@@ -29,15 +29,23 @@
 		}
 
 		function _postTask(task) {
-			return $http.post(ConfigApp.baseUrl + 'api/v1/tasks', {task: task});	
+			return $http.post(ConfigApp.baseUrl + 'api/v1/tasks', task);	
 		}
 
 		function _putTask(task) {
-			return $http.put(ConfigApp.baseUrl + 'api/v1/tasks/' + task.id, {task : task});
+			return $http.put(ConfigApp.baseUrl + 'api/v1/tasks/' + task.id, task);
 		}
 
 		function _deleteTask(id) {
 			return $http.delete(ConfigApp.baseUrl + 'api/v1/tasks/' + id);
+		}
+
+		function _reportTaskGeneral() {
+			return $http.get(ConfigApp.baseUrl + 'api/v1/reports/tasks');
+		}
+
+		function _reportTaskCategory() {
+			return $http.get(ConfigApp.baseUrl + 'api/v1/reports/tasks/category');
 		}
 
 		return {
@@ -45,7 +53,9 @@
 			getTask : _getTask,
 			postTask : _postTask,
 			putTask : _putTask,
-			deleteTask : _deleteTask
+			deleteTask : _deleteTask,
+			reportTaskGeneral : _reportTaskGeneral,
+			reportTaskCategory : _reportTaskCategory
 		};	
 	}
 })();

@@ -29,11 +29,11 @@
 		}
 
 		function _postPerson(person) {
-			return $http.post(ConfigApp.baseUrl + 'api/v1/people', {person: person});	
+			return $http.post(ConfigApp.baseUrl + 'api/v1/people', person);	
 		}
 
 		function _putPerson(person) {
-			return $http.put(ConfigApp.baseUrl + 'api/v1/people/' + person.id, {person : person});
+			return $http.put(ConfigApp.baseUrl + 'api/v1/people/' + person.id, person);
 		}
 
 		function _deletePeople(id) {

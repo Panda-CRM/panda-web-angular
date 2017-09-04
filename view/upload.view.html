@@ -1,0 +1,66 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	<h1>
+		<i class="fa fa-tag" /> Upload de Arquivos
+		<small>{{routerAction}}</small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#/"><i class="fa fa-dashboard" /> Inicio</a></li>
+		<li><a href="#/task-categories" class="menu_action"><i class="fa fa-calendar"></i> Upload de Arquivos</a></li>
+		<li class="active">{{routerAction}}</li>
+	</ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+	<!-- Box para Erros -->
+	<div ng-show="error != null" class="callout callout-danger">
+		<h4><i class="icon fa fa-warning" /> Erro</h4>
+
+	    <p ng-repeat="err in error">{{err}}</p>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6">
+			<div class="box box-primary">
+				<div class="box-header with-border"></div>
+				<div class="box-body">
+				<form>
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="form-group">
+								<label>Decrição</label>
+								<input ng-model="arquivo.file" type="file" name="file" id="fileUpload" class="form-control">
+							</div>
+						</div>
+					</div>
+				</form>
+				<div class="box-footer">
+					<div class="pull-right">
+						<button ng-click="upload()" class="btn btn-success"><i class="fa fa-fw fa-save" /> Salvar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- /.content -->
+
+<div id="modal-item-delete" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title text-red"><i class="icon fa fa-warning" /> Exclusão</h4>
+      </div>
+      <div class="modal-body">
+        <p>Deseja realmente excluir o(s) registro(s)?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button ng-click="deleteTaskCategory(taskCategory)" type="button" class="btn btn-danger" data-dismiss="modal">Excluir</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

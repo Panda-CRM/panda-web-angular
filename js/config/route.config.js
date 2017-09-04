@@ -51,6 +51,11 @@
             controller: 'TaskListCtrl'
 		});
 
+		$routeProvider.when('/tasks/dashboard', {
+			templateUrl: 'view/tasks-charts.view.html',
+            controller: 'TaskDashboardCtrl'
+		});
+
 		$routeProvider.when('/tasks/new', {
 			templateUrl: 'view/tasks-edit.view.html',
             controller: 'TaskNewCtrl',
@@ -90,6 +95,16 @@
 		$routeProvider.when('/task-categories/:id/edit', {
 			templateUrl: 'view/task-categories-edit.view.html',
             controller: 'TaskCategoriesEditCtrl'
+		});
+
+		$routeProvider.when('/sales', {
+			templateUrl: 'view/sales-list.view.html',
+            controller: 'SalesListCtrl'
+		});
+
+		$routeProvider.when('/sale-products', {
+			templateUrl: 'view/sale-products-list.view.html',
+            controller: 'SaleProductsListCtrl'
 		});
 	}
 })();

@@ -4,34 +4,68 @@
   <small></small>
 </h1>
 <ol class="breadcrumb">
-  <li><a href="#" class="menu_action" id="dashboard"><i class="fa fa-dashboard"></i> Inicio</a></li>
+  <li><a href="#" class="menu_action"><i class="fa fa-dashboard"></i> Inicio</a></li>
   <li class="active">Relatórios</li>
 </ol>
 </section>
 
 <!-- Main content -->
 <section class="content">
-  <div class="col-md-12">
-    <!-- Donut chart -->
-    <div class="box box-primary">
-      <div class="box-header with-border">
-        <i class="fa fa-bar-chart-o"></i>
-
-        <h3 class="box-title">Quantidade de atendimento por responsável</h3>
-
-        <div class="box-tools pull-right">
-          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-          </button>
-          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+  <div class="row">
+    <div class="col-md-12">
+      <!-- Donut chart -->
+      <div class="box box-primary">
+        <div class="box-header with-border">
+          <i class="fa fa-bar-chart-o"></i>
+          <h3 class="box-title">Gráficos de pizza</h3>
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+          </div>
         </div>
+        <div class="box-body">
+          <div class="row">
+            
+            <div class="col-sm-4 col-md-2">
+              <canvas id="tasks-chart-completed"></canvas>
+            </div>
+
+            <div class="col-sm-4 col-md-2">
+              <canvas id="tasks-chart-all"></canvas>
+            </div>
+
+            <div class="col-sm-4 col-md-2">
+              <canvas id="tasks-chart-category"></canvas>
+            </div>
+
+          </div>
+        </div>
+        <!-- /.box-body-->
       </div>
-      <div class="box-body">
-        <button type="button" id="btn-task-chart-refresh" class="btn btn-success">Refresh</button>
-        <div id="donut-chart" style="height: 300px;"></div>
+      <!-- /.box -->
+      <div class="box box-primary">
+        <div class="box-header with-border">
+          <i class="fa fa-bar-chart-o"></i>
+          <h3 class="box-title">Gráficos de linhas</h3>
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+          </div>
+        </div>
+        <div class="box-body">
+          <div class="row">
+            
+            <div class="col-sm-12 col-md-12">
+              <canvas id="tasks-chart-line" height="80"></canvas>
+            </div>
+
+          </div>
+        </div>
+        <!-- /.box-body-->
       </div>
-      <!-- /.box-body-->
+      <!-- /.box -->
+      <button ng-click="loadReports()" type="button" class="btn btn-success">Atualizar</button>
     </div>
-    <!-- /.box -->
   </div>
   <!-- /.col -->
 </section>

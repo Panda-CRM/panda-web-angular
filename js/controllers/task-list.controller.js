@@ -6,7 +6,7 @@
 		.controller('TaskListCtrl', Controller);
 
 	function Controller($scope, TaskService, TaskHelper, Notification, NotificationHelper) {
-
+		/* Inicializa o componente de calendário da view */
 		$('#calendar-start-date').datetimepicker({
             locale: 'pt-br',
             format: 'DD/MM/YYYY'
@@ -19,18 +19,20 @@
 
 		/* Carrega as tarefas na view */
 		$scope.loadTasks = function() {
+			/* Seta os itens da paginação */
 			$scope.filters.page = $scope.currentPage;
 			$scope.filters.per_page = itemPerPage;
+			/* Seta false para que cada refresh nenhum item fique selecionado */
 			$scope.isAllSelected = false;
-
+			/* Pega as datas dos filtros da view */
 			$scope.filters.start_date = $('#calendar-start-date').datetimepicker('date');
 			$scope.filters.end_date = $('#calendar-end-date').datetimepicker('date');
-
+			/* Faz um format da data inicio */
 			if ($scope.filters.start_date != null) {
 				var d = new Date($scope.filters.start_date);
 				$scope.filters.start_date = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate();
 			}
-
+			/* Faz um format da data fim */
 			if ($scope.filters.end_date != null) {
 				var d = new Date($scope.filters.end_date);
 				$scope.filters.end_date = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate();
@@ -38,7 +40,7 @@
 
 			TaskService.getTasks($scope.filters).success(function (data) {
 				/* Seta qual a ultima pagina que contem dados */
-				$scope.lastPage = data.meta.pagination.total_pages;
+				$scope.lastPage = data.pages.total_pages;
 				/* Verifica a situação da tarefa */
 				TaskHelper.checkTaskStatus(data.tasks);
 				/* Atualiza a quantidade de tarefas não visulizadas */

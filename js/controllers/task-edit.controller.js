@@ -58,15 +58,11 @@
 			task.task_historics = commentsTemp;
 			/* Verifica se a tarefa foi concluída para setar uma data de conclusão */
 			//task.completed_at = $scope.completed ? (task.completed_at ? task.completed_at : new Date()) : delete task.completed_at;
-			
-			if ($scope.completed) {
-				if (!task.completed_at) {
-					task.completed_at = new Date();
-				}
+			if ($scope.completed && !task.completed_at) {
+				task.completed_at = new Date();
 			} else {
 				delete task.completed_at;
 			}
-
 			/* Posta os dados no server */
 			TaskService.putTask(task).success(function (data) {
 				/* Notifica usuário os dados foi alterado */

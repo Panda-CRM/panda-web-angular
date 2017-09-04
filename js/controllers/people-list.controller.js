@@ -14,7 +14,7 @@
 
 			PeopleService.getPeople($scope.filters).success(function (data) {
 				/* Seta qual a ultima pagina que contem dados */
-				$scope.lastPage = data.meta.pagination.total_pages;
+				$scope.lastPage = data.pages.total_pages;
 				/* Seta os dados no array de People */
 				$scope.people = data.people;
 			}).error(function (data) {
